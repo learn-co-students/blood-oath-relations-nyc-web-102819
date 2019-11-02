@@ -39,6 +39,18 @@ class Follower
 
     end
 
+    def my_cult_slogans
+      cults.map do |cult|
+        cult.slogan
+      end
+    end
+
+    def self.follower_activity_sort
+      follower_activity = self.all.sort |follower|
+      follower 
+
+
+
     
 
 

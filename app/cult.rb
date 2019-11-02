@@ -40,20 +40,22 @@ class Cult
       end
     end
 
-    def followers
-      blood_oaths.map do |blood_oath|
+    def blood_oaths
+      BloodOath.all.select do |blood_oath|
         blood_oath.cult == self
       end
     end
+
+    def followers
+      blood_oaths.map do |bloodoath|
+        bloodoath.follower == self
+      end
+    end
+
     def cult_population
       followers.length
     end
 
-    def blood_oaths
-      BloodOath.all.select do |blood_oath|
-        blood_oath.follower == self
-      end
-    end
 
     def average_age
       total_age = followers.reduce(0) do | sum, follower |
@@ -61,6 +63,39 @@ class Cult
       end
     total_age / followers.length
     end
+
+    def my_followers_mottos
+      followers.map do |person|
+        person.life_motto
+      end
+    end
+
+    def self.least_popular
+      self.all.min_by do |cult|
+        cult.followers.length
+      end
+    end
+
+    def self.cult_locations
+      locations = {}
+      self.all.each do |cult|
+        if !locations[cult.location]
+          locations[cult.location]=1
+        else
+          locations[cult.location]+=1
+        end
+      end
+        locations
+    end
+
+    def self.most_common_location
+      # returns a String that is the location with the most cults
+      location = cult_locations.max_by do |location,count|
+        count
+      end
+      location[0]
+    end
+
 
 
 
