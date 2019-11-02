@@ -46,12 +46,20 @@ class Follower
     end
 
     def self.follower_activity_sort
-      follower_activity = self.all.sort |follower|
-      follower 
-
-
-
-    
-
+      follower_activity = self.all.map do |follower|
+        {follower => follower.cults.length}
+      end
+      sorted_follower_activity = follower_activity.sort_by do |follower|
+        follower.values[0]
+      end
+      sorted_follower_activity.reverse
+    end
+    def self.most_active
+    self.follower_activity_sort[0]
+    end
+    def self.top_ten
+      follower_activity_sort[0...9]
+    end
+ 
 
 end
