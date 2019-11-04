@@ -24,7 +24,7 @@ class Follower
     end
 
     # take all initiations and select cults for a follower
-    # couldn't do it in one step, crated initations helper method
+    ### couldn't do it in one step, crated initations helper method
     def cults
         self.initiations.map do |each| 
             each.cult if each.follower.name == self.name

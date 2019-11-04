@@ -98,6 +98,6 @@ top10 = Follower.top_ten # expect carlos, tim/barak,f4-10, no f11
 flatiron_all = flatiron.cult_followers
 
 binding.pry
-
+l 
 
 puts "Mwahahaha!" # just in case pry is buggy and exits
